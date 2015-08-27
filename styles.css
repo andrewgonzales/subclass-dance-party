@@ -5,6 +5,9 @@ body{
   margin: 0px;
   background-color:#444;
   font-size: 18px;
+  background-image: url("images/iowastatefair.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
@@ -23,15 +26,39 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 
-.hide {
-  border:8px solid green;
-  border-radius:10px;
-  position:absolute; 
-}
 
 .dancer{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
 }
+div.trogdor{
+  border: 0px solid green;
+  border-radius: 0px;
+  height:50px;
+}
+div.romney{
+  border: 0px solid green;
+  border-radius: 0px;
+  height:50px;
+}
 
+div.politician{
+  border: 0px solid green;
+  border-radius: 0px;
+  height: 50px;
+}
+
+div.hide {
+  border:10px solid green;
+  border-radius:10px;
+  position:absolute; 
+}
+
+.rotatedLeft{
+  transform: rotate(7.5deg);
+}
+
+.rotatedRight{
+  transform: rotate(-15deg);
+}

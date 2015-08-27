@@ -1,9 +1,5 @@
 var BlinkyDancer = function(top, left, timeBetweenSteps){
-  Dancer.call(this);
-  this.timeBetweenSteps = timeBetweenSteps;
-  this.oldStep = Dancer.prototype.step;
-  this.isActive = true;
-  this.distances = [];
+  Dancer.call(this, top, left, timeBetweenSteps);
 }
 BlinkyDancer.prototype = Object.create(Dancer.prototype);
 BlinkyDancer.prototype.constructor = BlinkyDancer;
@@ -20,15 +16,7 @@ BlinkyDancer.prototype.step = function(){
     this.$node.show();
   }
  
-  this.distances = [];
-  for(var i = 0; i < window.dancers.length; i++){
-    this.distances.push(Math.pow(Math.pow(window.dancers[i].left-this.left, 2) + Math.pow(window.dancers[i].top-this.top, 2), 0.5));
-    if(this.distances[i]<50 && this.distances[i] !== 0){
-      this.freakOut();
-    }
-  }
-  //if nearest neighbor < x pixels away
-  //do something
+ this.measureDistance();
 };
 
 var makeBlinkyDancer = function(top, left, timeBetweenSteps){

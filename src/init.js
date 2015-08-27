@@ -19,12 +19,16 @@ $(document).ready(function(){
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
-       
-    var dancer = dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
-      Math.random() * 350
-    );
+    
+    var timeStep = Math.random()*1000;
+    if(timeStep < 250){
+      timeStep = 250;
+    }
+
+    var inputHeight = $("body").height() * Math.random()*.8;
+    var inputWidth = $("body").width() * Math.random()*.8;
+
+    var dancer = dancerMakerFunction(inputHeight, inputWidth, timeStep);
     $('body').append(dancer.$node);
   });
 

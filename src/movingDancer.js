@@ -1,12 +1,5 @@
 var MovingDancer = function(top, left, timeBetweenSteps){
-  Dancer.call(this);
-  this.left = left;
-  this.top = top;
-  this.timeBetweenSteps = timeBetweenSteps;
-  this.oldStep = Dancer.prototype.step;
-  this.isActive = true;
-  this.distances = [];
-  // this.whenAdded = window.dancers.length-1;
+  Dancer.call(this, top, left, timeBetweenSteps);
 }
 MovingDancer.prototype = Object.create(Dancer.prototype);
 MovingDancer.prototype.constructor = MovingDancer;
@@ -25,18 +18,12 @@ MovingDancer.prototype.step = function(){
     }
 
     if(this.left > $("body").width()-20){
-      this.left -= 50;
+      this.left -= $("body").width();
       this.setPosition(this.top,this.left)
     }
   }
 
-  this.distances = [];
-  for(var i = 0; i < window.dancers.length; i++){
-    this.distances.push(Math.pow(Math.pow(window.dancers[i].left-this.left, 2) + Math.pow(window.dancers[i].top-this.top, 2), 0.5));
-    if(this.distances[i]<50 && this.distances[i] !== 0){
-      this.freakOut();
-    }
-  }
+  this.measureDistance();
   
 
 };  
