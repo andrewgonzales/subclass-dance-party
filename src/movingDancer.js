@@ -4,6 +4,9 @@ var MovingDancer = function(top, left, timeBetweenSteps){
   this.top = top;
   this.timeBetweenSteps = timeBetweenSteps;
   this.oldStep = Dancer.prototype.step;
+  this.isActive = true;
+  this.distances = [];
+  // this.whenAdded = window.dancers.length-1;
 }
 MovingDancer.prototype = Object.create(Dancer.prototype);
 MovingDancer.prototype.constructor = MovingDancer;
@@ -15,17 +18,28 @@ MovingDancer.prototype.step = function(){
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
 
-  if(this.left < $("body").width()-20){
-    this.left += 20;
-    this.setPosition(this.top,this.left)
+  if(this.isActive){
+    if(this.left < $("body").width()-20){
+      this.left += 20;
+      this.setPosition(this.top,this.left)
+    }
+
+    if(this.left > $("body").width()-20){
+      this.left -= 50;
+      this.setPosition(this.top,this.left)
+    }
   }
 
-  if(this.left > $("body").width()-20){
-    this.left -= 50;
-    this.setPosition(this.top,this.left)
+  this.distances = [];
+  for(var i = 0; i < window.dancers.length; i++){
+    this.distances.push(Math.pow(Math.pow(window.dancers[i].left-this.left, 2) + Math.pow(window.dancers[i].top-this.top, 2), 0.5));
+    if(this.distances[i]<50 && this.distances[i] !== 0){
+      this.freakOut();
+    }
   }
+  
 
-};
+};  
 
 
 var makeMovingDancer = function(top, left, timeBetweenSteps){
@@ -33,7 +47,7 @@ var makeMovingDancer = function(top, left, timeBetweenSteps){
 
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
-
+  window.dancers.push(movingDancer);
   movingDancer.setPosition(top, left);
   movingDancer.step();
 
