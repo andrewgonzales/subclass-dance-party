@@ -28,30 +28,22 @@ body, a:link, a:visited, a:active{
 
 
 .dancer{
-  border:10px solid red;
-  border-radius:10px;
   position:absolute;
 }
+
 div.trogdor{
-  border: 0px solid green;
-  border-radius: 0px;
   height:50px;
 }
 div.romney{
-  border: 0px solid green;
-  border-radius: 0px;
+  
   height:50px;
 }
 
 div.politician{
-  border: 0px solid green;
-  border-radius: 0px;
   height: 50px;
 }
 
 div.hide {
-  border:10px solid green;
-  border-radius:10px;
   position:absolute; 
 }
 

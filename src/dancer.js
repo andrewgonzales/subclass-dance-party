@@ -11,22 +11,8 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.isActive = true;
   this.distances = [];
   this.$node = $('<span class="dancer" id =\"dancer' + this.counter + '\"></span>');
-  //TODO fix for last dancer
-  var context = this;
-  var selector = "dancer" + this.counter;
-//"#" + selector
-  $(".dancer").on("click" , function(event){
 
-    $(this).addClass("hide");
-    dancers[context.counter-1].isActive = false;
-    $(this).removeClass("dancer");
-  });
-  // $(".dancer").on("mouseleave", function(event){
-  //   $(this).addClass("dancer");
-  //   //function()
-  //   $(this).removeClass("hide");
-  //   // this.isActive = true;
-  // });
+
 };
 
 Dancer.prototype.step = function(){
@@ -38,31 +24,50 @@ Dancer.prototype.step = function(){
 Dancer.prototype.setPosition = function(top, left){
   // Use css top and left properties to position our <span> tag
   // where it belongs on the page. See http://api.jquery.com/css/
+
   var styleSettings = {
     top: top,
     left: left
   };
   this.$node.css(styleSettings);
+  this.logEventListener();
 };
 
-Dancer.prototype.freakOut = function(){
-  this.top = this.top-100;
+
+
+Dancer.prototype.burninate = function(enemyY, enemyX){
+  this.setPosition((enemyY+this.top)/4, (enemyX+this.left)/4);
 };
 
-// Dancer.prototype.lineUp = function(){  
-//   var  xCoord = window.width()/2 - window.dancers.length*20/2;
-//   for(var i = 0; i < window.dancers.length; i++){
-//     xCoord += 20;
-//     window.dancers[i].setPosition(window.height()/2, xCoord);
-//   }
-// };
 
 Dancer.prototype.measureDistance = function(){
-  this.distances = [];
     for(var i = 0; i < window.dancers.length; i++){
-      this.distances.push(Math.pow(Math.pow(window.dancers[i].left-this.left, 2) + Math.pow(window.dancers[i].top-this.top, 2), 0.5));
-      if(this.distances[i]<50 && this.distances[i] !== 0){
-        this.freakOut();
+      if (window.dancers[i] instanceof CircleDancer){
+        var enemyX = dancers[i].left;
+        var enemyY = dancers[i].top;
+        var distance =Math.pow(Math.pow(window.dancers[i].left-this.left, 2) + Math.pow(window.dancers[i].top-this.top, 2), 0.5);
+        this.burninate(enemyY, enemyX);
+        debugger;
+        if(distance < 50 && distance > 0){
+          debugger;
+          this.enemyAround = false;
+          $("#dancer" + dancers[i].counter).remove();
+        }
       }
     }
+};
+
+Dancer.prototype.logEventListener = function(){
+  var context = this;
+  var selector = "dancer"+ this.counter;
+  $("#" + selector).on("mouseenter" , function(event){
+    $(this).addClass("hide");
+    dancers[context.counter].isActive = false;
+    $(this).removeClass("dancer");
+  });
+  $("#" + selector).on("mouseleave", function(event){
+    $(this).addClass("dancer");
+    $(this).removeClass("hide");
+    context.isActive = true;
+  });
 };

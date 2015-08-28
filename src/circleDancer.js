@@ -2,10 +2,11 @@ var CircleDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
   this.radians = 0;
   this.sizeModifier = 1;
+  this.$node = $('<div class="circle dancer" id =\"dancer' + this.counter + '\"><img src="images/elephant.gif" alt="elephant" width=300></div>');
 }
 CircleDancer.prototype = Object.create(Dancer.prototype);
 CircleDancer.prototype.constructor = CircleDancer;
-
+  
 CircleDancer.prototype.step = function(){
   this.oldStep();
   
@@ -15,7 +16,6 @@ CircleDancer.prototype.step = function(){
     this.radians += Math.PI/8;
 
     this.setPosition(this.top, this.left);
-    this.measureDistance();
   }
 };
 

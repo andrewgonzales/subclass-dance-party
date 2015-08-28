@@ -2,7 +2,7 @@ var Romney = function(top, left, timeBetweenSteps){
   MovingDancer.call(this, top, left, timeBetweenSteps);
   this.radians = 0;
   this.sizeModifier = 5;
-  this.$node = $('<div class="romney dancer"><img src="images/romney.gif" alt="Romney" width=300></div>');
+  this.$node = $('<div class="romney dancer"  id =\"dancer' + this.counter + '\"><img src="images/romney.gif" alt="Romney" width=300></div>');
 };
 
 Romney.prototype = Object.create(MovingDancer.prototype);

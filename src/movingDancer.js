@@ -1,5 +1,6 @@
 var MovingDancer = function(top, left, timeBetweenSteps){
   Dancer.call(this, top, left, timeBetweenSteps);
+  this.$node = $('<div class="trogdor dancer" id =\"dancer' + this.counter + '\"><img src="images/corn.gif" alt="corn" width=75></div>');
 }
 MovingDancer.prototype = Object.create(Dancer.prototype);
 MovingDancer.prototype.constructor = MovingDancer;
@@ -23,7 +24,6 @@ MovingDancer.prototype.step = function(){
     }
   }
 
-  this.measureDistance();
   
 
 };  
